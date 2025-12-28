@@ -2,8 +2,6 @@
 
 Aurum Veloce is a comprehensive car rental solution designed for both customers and administrators. It features a modern, responsive **Web Application** for clients and a robust **Desktop Application** for internal management.
 
-## 🚀 Experience the Future of Car Rentals
-![Aurum Veloce Home](/home/spook/.gemini/antigravity/brain/40df1b12-f38c-436b-9d24-be0ee2ea2df9/uploaded_image_0_1766822992532.png)
 
 ## ✨ Core Features
 
@@ -29,17 +27,7 @@ Aurum Veloce is a comprehensive car rental solution designed for both customers 
 - **ORM**: Entity Framework Core (Code First)
 - **Diagrams**: UML (TikZ/Mermaid)
 
-## 📸 Screenshots
 
-| Customer Fleet View | Admin Dashboard |
-| :---: | :---: |
-| ![Fleet](/home/spook/.gemini/antigravity/brain/40df1b12-f38c-436b-9d24-be0ee2ea2df9/uploaded_image_4_1766822992532.png) | ![Dashboard](/home/spook/.gemini/antigravity/brain/40df1b12-f38c-436b-9d24-be0ee2ea2df9/uploaded_image_0_1766823290124.png) |
-
-| Financial Management | Audit Logs |
-| :---: | :---: |
-| ![Financials](/home/spook/.gemini/antigravity/brain/40df1b12-f38c-436b-9d24-be0ee2ea2df9/uploaded_image_2_1766823290124.png) | ![Logs](/home/spook/.gemini/antigravity/brain/40df1b12-f38c-436b-9d24-be0ee2ea2df9/uploaded_image_4_1766823290124.png) |
-
-## ⚙️ Installation & Setup
 
 ### Prerequisites
 - .NET 9 SDK
