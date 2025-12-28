@@ -1,0 +1,73 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:CarRental.Desktop.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="CarRental.Desktop.Views.DashboardView"
+             x:DataType="vm:DashboardViewModel">
+
+    <Grid RowDefinitions="Auto, *">
+        <TextBlock Grid.Row="0" Text="Dashboard" FontSize="24" FontWeight="Bold" Margin="0,0,0,30"/>
+        
+        <Grid Grid.Row="1" ColumnDefinitions="*,*,*" RowDefinitions="Auto, *">
+            <!-- Stat Cards -->
+            <Border Grid.Column="0" Background="#222196F3" CornerRadius="10" Padding="20" Margin="0,0,10,0">
+                <StackPanel>
+                    <TextBlock Text="Total Fleet" FontSize="14" Foreground="#AACCCF"/>
+                    <TextBlock Text="{Binding TotalCars}" FontSize="32" FontWeight="Bold"/>
+                </StackPanel>
+            </Border>
+            
+            <Border Grid.Column="1" Background="#224CAF50" CornerRadius="10" Padding="20" Margin="10,0,10,0">
+                <StackPanel>
+                    <TextBlock Text="Available" FontSize="14" Foreground="#AACCCF"/>
+                    <TextBlock Text="{Binding AvailableCars}" FontSize="32" FontWeight="Bold" Foreground="#4CAF50"/>
+                </StackPanel>
+            </Border>
+            
+            <Border Grid.Column="2" Background="#22FFC107" CornerRadius="10" Padding="20" Margin="10,0,0,0">
+                <StackPanel>
+                    <TextBlock Text="Pending Orders" FontSize="14" Foreground="#AACCCF"/>
+                    <TextBlock Text="{Binding PendingOrders}" FontSize="32" FontWeight="Bold" Foreground="#FFC107"/>
+                </StackPanel>
+            </Border>
+            
+            <!-- Upcoming Events (Work Calendar) -->
+            <Border Grid.Row="1" Grid.ColumnSpan="3" Background="#11FFFFFF" CornerRadius="10" Padding="20" Margin="0,20,0,0">
+                <Grid RowDefinitions="Auto, *">
+                    <TextBlock Grid.Row="0" Text="Operations Calendar (Pickups, Returns, Alerts)" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,15" Foreground="#D4AF37"/>
+                    <ListBox Grid.Row="1" ItemsSource="{Binding CalendarEvents}" Background="Transparent">
+                         <ListBox.ItemTemplate>
+                             <DataTemplate>
+                                 <Border Background="#1AFFFFFF" CornerRadius="8" Padding="15" Margin="0,0,0,10" BorderBrush="{Binding Color}" BorderThickness="1 0 0 0">
+                                     <Grid ColumnDefinitions="Auto, *, Auto">
+                                         <!-- Icon and Time -->
+                                         <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,15,0">
+                                             <TextBlock Text="{Binding Icon}" FontSize="24" HorizontalAlignment="Center"/>
+                                             <TextBlock Text="{Binding DisplayTime}" FontSize="12" Foreground="Gray" HorizontalAlignment="Center"/>
+                                         </StackPanel>
+                                         
+                                         <!-- Details -->
+                                         <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                             <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="16" Foreground="{Binding Color}"/>
+                                             <TextBlock Text="{Binding Description}" FontSize="13" Foreground="#CCCCCC" TextWrapping="Wrap"/>
+                                         </StackPanel>
+                                         
+                                         <!-- Status and Date -->
+                                         <StackPanel Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                             <Border Background="#33FFFFFF" CornerRadius="4" Padding="8,4" Margin="0,0,0,5">
+                                                 <TextBlock Text="{Binding Status}" FontSize="10" FontWeight="Bold"/>
+                                             </Border>
+                                             <TextBlock Text="{Binding DisplayDate}" FontSize="12" Foreground="Gray" HorizontalAlignment="Right"/>
+                                         </StackPanel>
+                                     </Grid>
+                                 </Border>
+                             </DataTemplate>
+                         </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

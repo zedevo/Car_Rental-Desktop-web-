@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Aurum Veloce</title>
+    <link rel="icon" type="image/png" href="~/images/logo.png" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/CarRental.Web.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/images/logo.png" alt="Aurum Veloce" height="35" class="me-2 d-inline-block align-text-top" >
+                    AURUM VELOCE
+                </a>
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-center">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Fleet" asp-action="Index">Our Fleet</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Client" asp-action="MyBookings">Bookings</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Privacy">Privacy Settings</a>
+                        </li>
+                        <partial name="_LoginPartial" />
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <main role="main" style="padding-top: 100px;">
+        @RenderBody()
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h4 class="fw-bold text-gradient mb-4">AURUM VELOCE</h4>
+                    <p class="text-secondary">Providing premium car rental services with a fleet of luxury and high-performance vehicles. Experience the ultimate driving pleasure.</p>
+                </div>
+                <div class="col-lg-2 offset-lg-2">
+                    <h5 class="text-white mb-4">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-secondary text-decoration-none hover-white">About Us</a></li>
+                        <li class="mb-2"><a href="#" class="text-secondary text-decoration-none hover-white">Our Fleet</a></li>
+                        <li class="mb-2"><a href="#" class="text-secondary text-decoration-none hover-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="text-white mb-4">Contact Us</h5>
+                    <p class="text-secondary"><i class="bi bi-geo-alt me-2 text-primary"></i> Marrakech, Morocco</p>
+                    <p class="text-secondary"><i class="bi bi-telephone me-2 text-primary"></i> +212 5 24 00 00 00</p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="#" class="text-secondary fs-4"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-secondary fs-4"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-secondary fs-4"><i class="bi bi-twitter-x"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-secondary mt-5 opacity-25">
+            <div class="text-center text-secondary small py-4">
+                &copy; @DateTime.Now.Year Aurum Veloce. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

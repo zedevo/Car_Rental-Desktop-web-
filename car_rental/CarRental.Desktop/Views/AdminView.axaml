@@ -1,0 +1,72 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:CarRental.Desktop.ViewModels"
+             x:Class="CarRental.Desktop.Views.AdminView"
+             x:DataType="vm:AdminViewModel">
+    
+    <TabControl>
+        <!-- Tab 1: Staff Directory -->
+        <TabItem Header="Staff &amp; HR">
+            <Grid ColumnDefinitions="*, 380" Margin="10">
+                <Grid RowDefinitions="Auto, *">
+                    <TextBlock Grid.Row="0" Text="Desk Worker Directory" FontSize="18" FontWeight="Bold" Margin="0,0,0,15"/>
+                    <DataGrid Grid.Row="1" ItemsSource="{Binding Employees}" SelectedItem="{Binding SelectedEmployee}"
+                              AutoGenerateColumns="False" IsReadOnly="True" BorderThickness="1" BorderBrush="#33FFFFFF">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                            <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" Width="*"/>
+                            <DataGridTextColumn Header="Role" Binding="{Binding Role}" Width="100"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+
+                <ScrollViewer Grid.Column="1" Margin="15,0,0,0">
+                    <StackPanel Spacing="15">
+                        <Border Background="#11FFFFFF" CornerRadius="8" Padding="15">
+                            <StackPanel Spacing="10">
+                                <TextBlock Text="Register Desk Worker" FontWeight="Bold" FontSize="16" Foreground="#D4AF37"/>
+                                <TextBox Watermark="First Name" Text="{Binding NewEmployeeName}"/>
+                                <TextBox Watermark="Last Name" Text="{Binding NewEmployeeLastName}"/>
+                                <TextBox Watermark="National ID" Text="{Binding NewEmployeeIdCard}"/>
+                                <NumericUpDown Value="{Binding NewEmployeeAge}" Minimum="18"/>
+                                <ComboBox ItemsSource="{Binding RoleOptions}" SelectedItem="{Binding NewEmployeeRole}" HorizontalAlignment="Stretch"/>
+                                
+                                <StackPanel Spacing="10" IsVisible="{Binding IsDeskAgent}">
+                                    <Separator Height="1" Background="#22FFFFFF"/>
+                                    <TextBox Watermark="Work Email" Text="{Binding NewEmployeeEmail}"/>
+                                    <TextBox Watermark="System Username" Text="{Binding NewEmployeeUsername}"/>
+                                    <TextBox Watermark="System Password" PasswordChar="*" Text="{Binding NewEmployeePassword}"/>
+                                </StackPanel>
+                                
+                                <Button Content="Add to System" Command="{Binding AddEmployeeCommand}" 
+                                        HorizontalAlignment="Stretch" Background="#D4AF37" Foreground="Black" FontWeight="Bold"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Background="#11FFFFFF" CornerRadius="8" Padding="15" IsVisible="{Binding !!SelectedEmployee}">
+                            <StackPanel Spacing="10">
+                                <TextBlock Text="Employee Actions" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding SelectedEmployee.Name}"/>
+                                <Button Content="Terminate Account" Command="{Binding DeleteEmployeeCommand}" Background="#FF5252" HorizontalAlignment="Stretch"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+        </TabItem>
+
+        <!-- Tab 2: Audit Logs -->
+        <TabItem Header="Audit Logs">
+            <Grid RowDefinitions="Auto, *" Margin="15">
+                <TextBlock Grid.Row="0" Text="System Activity &amp; Timestamps" FontSize="20" FontWeight="Bold" Margin="0,0,0,20" Foreground="#2196F3"/>
+                <DataGrid Grid.Row="1" ItemsSource="{Binding Logs}" AutoGenerateColumns="False" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Timestamp" Binding="{Binding Timestamp, StringFormat=\{0:HH:mm:ss dd/MM\}}" Width="150"/>
+                        <DataGridTextColumn Header="Employee" Binding="{Binding Employee.Name}" Width="150"/>
+                        <DataGridTextColumn Header="Activity" Binding="{Binding Action}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </TabItem>
+    </TabControl>
+</UserControl>

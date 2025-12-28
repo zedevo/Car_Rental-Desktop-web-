@@ -1,0 +1,31 @@
+@{
+    ViewData["Title"] = "Booking Submitted";
+}
+
+<div class="container mt-5 text-center fade-in-up">
+    <div class="checkmark-circle">
+        <div class="background"></div>
+        <div class="checkmark draw"></div>
+    </div>
+    
+    <h1 class="text-success mb-4 fw-bold">Booking Confirmed!</h1>
+    <div class="text-center">
+        <h1 class="display-4 text-success">Booking Successful!</h1>
+        <p class="lead">Your order has been placed. Order ID: #@ViewBag.OrderId</p>
+        
+        <div class="mt-4">
+            <a asp-action="DownloadWaiver" asp-route-id="@ViewBag.OrderId" class="btn btn-outline-primary btn-lg">
+                <i class="bi bi-file-earmark-pdf-fill"></i> Download Legal Waiver (PDF)
+            </a>
+        </div>
+        
+        <p class="mt-3 text-muted">Please download and sign the waiver. Our agent will verify it upon pickup.</p>
+        
+        <a asp-controller="Home" asp-action="Index" class="btn btn-link mt-5">Return Home</a>
+    </div>
+    <div class="card glass-card d-inline-block p-4 mt-3">
+        <p class="lead">Your request has been successfully processed.</p>
+        <p class="text-muted">A confirmation email has been sent to you.</p>
+        <a href="/" class="btn btn-primary mt-3 px-5">Make Another Booking</a>
+    </div>
+</div>

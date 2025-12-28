@@ -1,0 +1,110 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:CarRental.Desktop.ViewModels"
+             x:Class="CarRental.Desktop.Views.ExpensesView"
+             x:DataType="vm:ExpensesViewModel">
+    
+    <Grid RowDefinitions="Auto, *, Auto" ColumnDefinitions="*, 350" Margin="10">
+        <!-- Header -->
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
+                   Text="Financial Operations &amp; Expense Management" 
+                   FontSize="20" FontWeight="Bold" Margin="0,0,0,20" Foreground="#D4AF37"/>
+        
+        <!-- Main Data Area -->
+        <Grid Grid.Row="1" Grid.Column="0" RowDefinitions="*, Auto" Margin="0,0,10,0">
+            <!-- Expenses List -->
+            <DataGrid Grid.Row="0" ItemsSource="{Binding Expenses}" SelectedItem="{Binding SelectedExpense}"
+                      AutoGenerateColumns="False" IsReadOnly="True" 
+                      BorderThickness="1" BorderBrush="#33FFFFFF" CornerRadius="8">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat=\{0:dd/MM/yyyy\}}" Width="100"/>
+                    <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="120"/>
+                    <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*"/>
+                    <DataGridTextColumn Header="Amount" Binding="{Binding Amount, StringFormat=\{0:C\}}" Width="100"/>
+                    <DataGridTextColumn Header="Expiry" Binding="{Binding ExpiryDate, StringFormat=\{0:dd/MM/yyyy\}}" Width="100"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <!-- Alerts List -->
+            <Border Grid.Row="1" Background="#11FFFFFF" CornerRadius="8" Padding="15" Margin="0,15,0,0" IsVisible="{Binding Alerts.Count}">
+                <StackPanel Spacing="5">
+                    <TextBlock Text="Recent Alerts" FontWeight="Bold" Foreground="#FF5252"/>
+                    <ItemsControl ItemsSource="{Binding Alerts}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" Foreground="#FF8A80" FontSize="12" Margin="0,2"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- Sidebar Actions -->
+        <ScrollViewer Grid.Row="1" Grid.Column="1">
+            <StackPanel Spacing="15">
+                <!-- Add New Expense -->
+                <Border Background="#11FFFFFF" CornerRadius="8" Padding="15" BorderBrush="#22FFFFFF" BorderThickness="1">
+                    <StackPanel Spacing="10">
+                        <TextBlock Text="Record New Transaction" FontWeight="Bold" FontSize="16" Foreground="#D4AF37"/>
+                        
+                        <StackPanel Spacing="5">
+                            <TextBlock Text="Category" FontSize="12" Foreground="Gray"/>
+                            <ComboBox ItemsSource="{Binding ExpenseTypes}" SelectedItem="{Binding NewType}" HorizontalAlignment="Stretch"/>
+                        </StackPanel>
+
+                        <TextBox Watermark="Description" Text="{Binding NewDescription}"/>
+                        <NumericUpDown Watermark="Amount" Value="{Binding NewAmount}" FormatString="C2"/>
+                        
+                        <StackPanel Spacing="5">
+                            <TextBlock Text="Expiry Date (Optional)" FontSize="12" Foreground="Gray"/>
+                            <DatePicker SelectedDate="{Binding NewExpiryDate}"/>
+                        </StackPanel>
+
+                        <Button Content="Post Transaction" Command="{Binding AddExpenseCommand}" 
+                                HorizontalAlignment="Stretch" Background="#D4AF37" Foreground="Black" FontWeight="Bold" Padding="10"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Edit Selected Expense -->
+                <Border Background="#11FFFFFF" CornerRadius="8" Padding="15" BorderBrush="#4CAF50" BorderThickness="1" IsVisible="{Binding !!SelectedExpense}">
+                    <StackPanel Spacing="10">
+                        <TextBlock Text="Manage Transaction" FontWeight="Bold" FontSize="16" Foreground="#4CAF50"/>
+                        
+                        <TextBox Text="{Binding SelectedExpense.Description}" Watermark="Description"/>
+                        <NumericUpDown Value="{Binding SelectedExpense.Amount}" FormatString="C2"/>
+                        
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Button Content="Update" Command="{Binding SaveChangesCommand}" Background="#4CAF50" Width="100"/>
+                            <Button Content="Remove" Command="{Binding DeleteExpenseCommand}" Background="#FF5252" Width="100"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Stats Footer -->
+        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ColumnDefinitions="*, *, *" Margin="0,20,0,0">
+            <Border Grid.Column="0" Background="#11FFFFFF" CornerRadius="8" Padding="15" Margin="0,0,10,0" BorderBrush="#4CAF50" BorderThickness="0,0,0,3">
+                <StackPanel Spacing="5">
+                    <TextBlock Text="Operating Revenue" Foreground="Gray" FontSize="12"/>
+                    <TextBlock Text="{Binding TotalRevenue, StringFormat=\{0:C\}}" FontSize="20" FontWeight="Bold" Foreground="#4CAF50"/>
+                </StackPanel>
+            </Border>
+            
+            <Border Grid.Column="1" Background="#11FFFFFF" CornerRadius="8" Padding="15" Margin="0,0,10,0" BorderBrush="#FF5252" BorderThickness="0,0,0,3">
+                <StackPanel Spacing="5">
+                    <TextBlock Text="Operating Costs" Foreground="Gray" FontSize="12"/>
+                    <TextBlock Text="{Binding TotalExpenses, StringFormat=\{0:C\}}" FontSize="20" FontWeight="Bold" Foreground="#FF5252"/>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Column="2" Background="#11FFFFFF" CornerRadius="8" Padding="15" BorderBrush="#D4AF37" BorderThickness="0,0,0,3">
+                <StackPanel Spacing="5">
+                    <TextBlock Text="Net Position" Foreground="Gray" FontSize="12"/>
+                    <TextBlock Text="{Binding NetProfit, StringFormat=\{0:C\}}" FontSize="20" FontWeight="Bold" Foreground="#D4AF37"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,14 @@
+/home/spook/Downloads/car_rental/CarRental.Data/bin/Debug/net10.0/CarRental.Data.deps.json
+/home/spook/Downloads/car_rental/CarRental.Data/bin/Debug/net10.0/CarRental.Data.runtimeconfig.json
+/home/spook/Downloads/car_rental/CarRental.Data/bin/Debug/net10.0/CarRental.Data.dll
+/home/spook/Downloads/car_rental/CarRental.Data/bin/Debug/net10.0/CarRental.Data.pdb
+/home/spook/Downloads/car_rental/CarRental.Data/obj/Debug/net10.0/CarRental.Data.csproj.AssemblyReference.cache
+/home/spook/Downloads/car_rental/CarRental.Data/obj/Debug/net10.0/CarRental.Data.GeneratedMSBuildEditorConfig.editorconfig
+/home/spook/Downloads/car_rental/CarRental.Data/obj/Debug/net10.0/CarRental.Data.AssemblyInfoInputs.cache
+/home/spook/Downloads/car_rental/CarRental.Data/obj/Debug/net10.0/CarRental.Data.AssemblyInfo.cs
+/home/spook/Downloads/car_rental/CarRental.Data/obj/Debug/net10.0/CarRental.Data.csproj.CoreCompileInputs.cache
+/home/spook/Downloads/car_rental/CarRental.Data/obj/Debug/net10.0/CarRental.Data.dll
+/home/spook/Downloads/car_rental/CarRental.Data/obj/Debug/net10.0/refint/CarRental.Data.dll
+/home/spook/Downloads/car_rental/CarRental.Data/obj/Debug/net10.0/CarRental.Data.pdb
+/home/spook/Downloads/car_rental/CarRental.Data/obj/Debug/net10.0/CarRental.Data.genruntimeconfig.cache
+/home/spook/Downloads/car_rental/CarRental.Data/obj/Debug/net10.0/ref/CarRental.Data.dll

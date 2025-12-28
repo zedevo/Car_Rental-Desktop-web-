@@ -1,0 +1,57 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:CarRental.Desktop.ViewModels"
+             x:Class="CarRental.Desktop.Views.CarsView"
+             x:DataType="vm:CarsViewModel">
+    
+    <Grid ColumnDefinitions="*, 350" Margin="10">
+        <!-- Fleet List -->
+        <Grid Grid.Column="0" RowDefinitions="Auto, *">
+            <TextBlock Grid.Row="0" Text="Fleet Management" FontSize="18" FontWeight="Bold" Margin="0,0,0,15" Foreground="#D4AF37"/>
+            <DataGrid Grid.Row="1" ItemsSource="{Binding Cars}" SelectedItem="{Binding SelectedCar}"
+                      AutoGenerateColumns="False" IsReadOnly="True" BorderThickness="1" BorderBrush="#33FFFFFF">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Make" Binding="{Binding Make}" Width="*"/>
+                    <DataGridTextColumn Header="Model" Binding="{Binding Model}" Width="*"/>
+                    <DataGridTextColumn Header="Plate" Binding="{Binding PlateNumber}" Width="100"/>
+                    <DataGridTextColumn Header="Daily Rate" Binding="{Binding DailyRate, StringFormat=\{0:C\}}" Width="100"/>
+                    <DataGridCheckBoxColumn Header="Available" Binding="{Binding IsAvailable}" Width="100"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+        <!-- Details / Add Panel -->
+        <ScrollViewer Grid.Column="1" Margin="15,0,0,0">
+            <StackPanel Spacing="15">
+                <Border Background="#11FFFFFF" CornerRadius="8" Padding="15">
+                    <StackPanel Spacing="10">
+                        <TextBlock Text="Add New Vehicle" FontWeight="Bold" FontSize="16" Foreground="#D4AF37"/>
+                        <TextBox Watermark="Make (e.g. BMW)" Text="{Binding NewMake}"/>
+                        <TextBox Watermark="Model (e.g. X5)" Text="{Binding NewModel}"/>
+                        <TextBox Watermark="Plate Number" Text="{Binding NewLicensePlate}"/>
+                        <NumericUpDown Watermark="Daily Rate" Value="{Binding NewDailyRate}" FormatString="C2"/>
+                        
+                        <Button Content="Add to Fleet" Command="{Binding CreateCarCommand}" 
+                                HorizontalAlignment="Stretch" Background="#D4AF37" Foreground="Black" FontWeight="Bold"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Background="#11FFFFFF" CornerRadius="8" Padding="15" IsVisible="{Binding !!SelectedCar}">
+                    <StackPanel Spacing="10">
+                        <TextBlock Text="Update Selected" FontWeight="Bold" FontSize="16" Foreground="#4CAF50"/>
+                        <TextBox Text="{Binding SelectedCar.Make}" Watermark="Make"/>
+                        <TextBox Text="{Binding SelectedCar.Model}" Watermark="Model"/>
+                        <TextBox Text="{Binding SelectedCar.PlateNumber}" Watermark="Plate"/>
+                        <NumericUpDown Value="{Binding SelectedCar.DailyRate}" FormatString="C2"/>
+                        <CheckBox Content="Is Available" IsChecked="{Binding SelectedCar.IsAvailable}"/>
+                        
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Button Content="Save" Command="{Binding UpdateCarCommand}" Background="#4CAF50" Width="80"/>
+                            <Button Content="Delete" Command="{Binding DeleteCarCommand}" Background="#FF5252" Width="80"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

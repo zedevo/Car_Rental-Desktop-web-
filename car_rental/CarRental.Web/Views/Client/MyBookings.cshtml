@@ -1,0 +1,88 @@
+@model IEnumerable<CarRental.Data.Models.Order>
+
+@{
+    ViewData["Title"] = "My Bookings";
+}
+
+<div class="container mt-5 fade-in-up">
+    <h2 class="text-primary fw-bold mb-4">My Bookings</h2>
+
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-info glass-card">@ViewBag.Message</div>
+    }
+
+    <div class="glass-card p-4">
+        @if (!Model.Any())
+        {
+            <div class="text-center py-5">
+                <i class="bi bi-calendar-x text-muted" style="font-size: 3rem;"></i>
+                <p class="lead mt-3">You haven't made any bookings yet.</p>
+                <a asp-controller="Booking" asp-action="Index" class="btn btn-primary mt-2">Book a Car Now</a>
+            </div>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-dark table-hover align-middle custom-table">
+                    <thead>
+                        <tr>
+                            <th class="bg-transparent border-secondary text-secondary">Order ID</th>
+                            <th class="bg-transparent border-secondary text-secondary">Vehicle</th>
+                            <th class="bg-transparent border-secondary text-secondary">Dates</th>
+                            <th class="bg-transparent border-secondary text-secondary">Route</th>
+                            <th class="bg-transparent border-secondary text-secondary">Status</th>
+                            <th class="bg-transparent border-secondary text-secondary">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody class="border-top-0">
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="bg-transparent border-secondary">#@item.Id</td>
+                                <td class="bg-transparent border-secondary">
+                                    @if(item.Car != null)
+                                    {
+                                        <div class="fw-bold text-white">@item.Car.Make @item.Car.Model</div>
+                                        <small class="text-secondary">@item.Car.PlateNumber</small>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-secondary fst-italic">Requested: @item.RequestedCarType</span>
+                                    }
+                                </td>
+                                <td class="bg-transparent border-secondary">
+                                    <div class="text-white"><i class="bi bi-calendar-event me-1 text-primary"></i> @item.StartDate.ToShortDateString()</div>
+                                    <div class="text-secondary ms-3">to @item.EndDate.ToShortDateString()</div>
+                                </td>
+                                <td class="bg-transparent border-secondary">
+                                    <div class="text-white"><i class="bi bi-geo-alt me-1 text-primary"></i> @item.PickupLocation</div>
+                                    <div class="text-secondary ms-3">to @item.Destination</div>
+                                </td>
+                                <td class="bg-transparent border-secondary">
+                                    @if(item.Status == CarRental.Data.Enums.OrderStatus.Pending)
+                                    {
+                                        <span class="badge bg-warning text-dark">Pending</span>
+                                    }
+                                    else if(item.Status == CarRental.Data.Enums.OrderStatus.Approved)
+                                    {
+                                        <span class="badge bg-success">Approved</span>
+                                    }
+                                    else if(item.Status == CarRental.Data.Enums.OrderStatus.Cancelled)
+                                    {
+                                        <span class="badge bg-danger">Cancelled</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-secondary">@item.Status</span>
+                                    }
+                                </td>
+                                <td class="fw-bold text-white bg-transparent border-secondary">$@item.TotalAmount</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>

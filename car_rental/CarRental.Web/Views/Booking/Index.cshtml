@@ -1,0 +1,157 @@
+@model CarRental.Web.Models.BookingViewModel
+@using CarRental.Data.Enums
+
+@{
+    ViewData["Title"] = "Book a Car";
+}
+
+<div class="container mt-5 fade-in-up">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-primary">Car Rental Booking</h1>
+        <p class="lead text-muted">Premium vehicles for your premium journey.</p>
+    </div>
+
+    <form asp-action="Create" method="post">
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                
+                <!-- Client Details Card -->
+                <div class="card glass-card mb-5 border-0">
+                    <div class="card-header-custom">
+                        <i class="bi bi-person-badge-fill me-2"></i> Client Information
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="ClientName" class="form-label">Full Name / Business Name</label>
+                                <input asp-for="ClientName" class="form-control" placeholder="e.g. John Doe or Acme Corp" />
+                                <span asp-validation-for="ClientName" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="ContactInfo" class="form-label">Contact Info</label>
+                                <input asp-for="ContactInfo" class="form-control" placeholder="Phone or Email" />
+                                <span asp-validation-for="ContactInfo" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="ClientType" class="form-label">Booking Type</label>
+                            <select asp-for="ClientType" class="form-select form-select-lg" id="clientTypeSelect" asp-items="Html.GetEnumSelectList<ClientType>()">
+                            </select>
+                        </div>
+
+                        <!-- Individual Fields -->
+                        <div id="individualFields" class="animate-fade">
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label asp-for="NationalId" class="form-label">National ID</label>
+                                    <input asp-for="NationalId" class="form-control" />
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label asp-for="DriverLicenseNumber" class="form-label">License No.</label>
+                                    <input asp-for="DriverLicenseNumber" class="form-control" />
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label asp-for="CreditCardNumber" class="form-label">Credit Card</label>
+                                    <input asp-for="CreditCardNumber" class="form-control" placeholder="**** **** **** ****" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Org Fields -->
+                        <div id="orgFields" style="display:none;" class="animate-fade">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="RegistrationNumber" class="form-label">Company Reg. No</label>
+                                    <input asp-for="RegistrationNumber" class="form-control" />
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="PassengerCount" class="form-label">Total Passengers</label>
+                                    <input asp-for="PassengerCount" class="form-control" type="number" min="1" />
+                                </div>
+                            </div>
+                            <div class="alert alert-light border-primary d-flex align-items-center" role="alert">
+                                <i class="bi bi-info-circle-fill text-primary me-2"></i>
+                                <div><strong>Note:</strong> Corporate bookings require a valid security deposit.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trip Details Card -->
+                <div class="card glass-card mb-5 border-0">
+                    <div class="card-header-custom" style="background: linear-gradient(90deg, #50e3c2 0%, #28a745 100%);">
+                         <i class="bi bi-map-fill me-2"></i> Trip Details
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <label asp-for="SelectedCarType" class="form-label">Preferred Vehicle</label>
+                                <select asp-for="SelectedCarType" class="form-select form-select-lg" asp-items="Html.GetEnumSelectList<CarType>()">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="PickupDate" class="form-label">Pickup Date</label>
+                                <input asp-for="PickupDate" class="form-control" type="datetime-local" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="EndDate" class="form-label">Return Date</label>
+                                <input asp-for="EndDate" class="form-control" type="datetime-local" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="PickupLocation" class="form-label">From</label>
+                                <input asp-for="PickupLocation" class="form-control" placeholder="Pickup Address" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Destination" class="form-label">To</label>
+                                <input asp-for="Destination" class="form-control" placeholder="Destination City" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary btn-lg shadow-lg">
+                        Confirm Booking <i class="bi bi-arrow-right-circle ms-2"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+<style>
+    .animate-fade {
+        animation: fadeIn 0.5s;
+    }
+    @@keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+</style>
+
+@section Scripts {
+    <script>
+        function toggleFields() {
+            var val = document.getElementById("clientTypeSelect").value;
+            // 0 = Individual
+            if (val == 0) {
+                document.getElementById("individualFields").style.display = "block";
+                document.getElementById("orgFields").style.display = "none";
+            } else {
+                // Org or Hotel
+                document.getElementById("individualFields").style.display = "none";
+                document.getElementById("orgFields").style.display = "block";
+            }
+        }
+
+        document.getElementById("clientTypeSelect").addEventListener("change", toggleFields);
+        toggleFields(); // Init
+    </script>
+}

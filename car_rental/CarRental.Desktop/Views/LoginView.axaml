@@ -1,0 +1,24 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:CarRental.Desktop.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
+             x:Class="CarRental.Desktop.Views.LoginView"
+             x:DataType="vm:LoginViewModel">
+    
+    <Border Background="#1AFFFFFF" CornerRadius="10" Padding="30" Width="350" VerticalAlignment="Center">
+        <StackPanel Spacing="15">
+             <TextBlock Text="AURUM VELOCE" FontSize="20" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+             
+             <TextBlock Text="Staff Login" FontSize="16" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+             
+             <TextBox Watermark="Email" Text="{Binding Email}"/>
+             <TextBox Watermark="Password" PasswordChar="*" Text="{Binding Password}"/>
+             
+             <TextBlock Text="{Binding ErrorMessage}" Foreground="#FF5252" FontSize="12" TextWrapping="Wrap"/>
+             
+             <Button Content="Login" Command="{Binding LoginCommand}" HorizontalAlignment="Stretch" Background="#D4AF37" Foreground="Black" FontWeight="Bold" Margin="0,10,0,0"/>
+        </StackPanel>
+    </Border>
+</UserControl>

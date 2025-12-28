@@ -1,0 +1,89 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:CarRental.Desktop.ViewModels"
+             x:Class="CarRental.Desktop.Views.OperationsView"
+             x:DataType="vm:OperationsViewModel">
+
+    <Grid ColumnDefinitions="2*, 1.5*" Margin="10">
+        <Grid Grid.Column="0" RowDefinitions="Auto,*,Auto,*">
+            <TextBlock Grid.Row="0" Text="Incoming Customer Requests" FontSize="16" FontWeight="Bold" Margin="0,0,0,10" Foreground="#2196F3"/>
+            <DataGrid Grid.Row="1" ItemsSource="{Binding PendingOrders}" SelectedItem="{Binding SelectedPendingOrder}" 
+                      IsReadOnly="True" BorderThickness="1" BorderBrush="#33FFFFFF" Margin="0,0,0,20">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Client" Binding="{Binding Client.Name}" Width="*"/>
+                    <DataGridTextColumn Header="Type" Binding="{Binding RequestedCarType}" Width="100"/>
+                    <DataGridTextColumn Header="Pickup" Binding="{Binding PickupLocation}" Width="120"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <TextBlock Grid.Row="2" Text="In-Progress Missions" FontSize="16" FontWeight="Bold" Margin="0,0,0,10" Foreground="#4CAF50"/>
+            <DataGrid Grid.Row="3" ItemsSource="{Binding ActiveOrders}" SelectedItem="{Binding SelectedActiveOrder}" 
+                      IsReadOnly="True" BorderThickness="1" BorderBrush="#33FFFFFF">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Client" Binding="{Binding Client.Name}" Width="*"/>
+                    <DataGridTextColumn Header="Driver" Binding="{Binding Driver.Name}" Width="100"/>
+                    <DataGridTextColumn Header="Car" Binding="{Binding Car.PlateNumber}" Width="100"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+        <StackPanel Grid.Column="1" Margin="20,0,0,0" Spacing="20">
+            <Border Background="#1A2196F3" BorderBrush="#2196F3" BorderThickness="1" CornerRadius="8" Padding="20" IsVisible="{Binding !!SelectedPendingOrder}">
+                <StackPanel Spacing="15">
+                    <TextBlock Text="Assignment Portal" FontWeight="Bold" FontSize="18" Foreground="#2196F3"/>
+                    <StackPanel>
+                        <TextBlock Text="Request for:" FontSize="12" Foreground="Gray"/>
+                        <TextBlock Text="{Binding SelectedPendingOrder.Client.Name}" FontSize="16" FontWeight="SemiBold"/>
+                    </StackPanel>
+                    
+                    <Separator Height="1" Background="#33FFFFFF"/>
+                    
+                    <StackPanel Spacing="5">
+                        <TextBlock Text="Select Vehicle" FontSize="12" Foreground="Gray"/>
+                        <ComboBox ItemsSource="{Binding AvailableCars}" SelectedItem="{Binding SelectedCar}" 
+                                  PlaceholderText="-- Select Available --" HorizontalAlignment="Stretch">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" Spacing="10">
+                                        <TextBlock Text="{Binding Model}" FontWeight="SemiBold"/>
+                                        <TextBlock Text="{Binding PlateNumber}" Foreground="Gray"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <StackPanel Spacing="5">
+                        <TextBlock Text="Select Driver" FontSize="12" Foreground="Gray"/>
+                        <ComboBox ItemsSource="{Binding AvailableDrivers}" SelectedItem="{Binding SelectedDriver}" 
+                                  PlaceholderText="-- Select Available --" HorizontalAlignment="Stretch">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <Button Content="Authorize &amp; Launch" Command="{Binding AssignOrderCommand}" 
+                            HorizontalAlignment="Stretch" Background="#2196F3" Foreground="White" FontWeight="Bold" Padding="10"/>
+                </StackPanel>
+            </Border>
+
+            <Border Background="#1AFFC107" BorderBrush="#FFC107" BorderThickness="1" CornerRadius="8" Padding="20" IsVisible="{Binding !!SelectedActiveOrder}">
+                <StackPanel Spacing="15">
+                    <TextBlock Text="Mission Management" FontWeight="Bold" FontSize="18" Foreground="#FFC107"/>
+                    <TextBlock Text="{Binding SelectedActiveOrder.Client.Name}" FontSize="16"/>
+                    <TextBlock Text="Status: Active Delivery" FontSize="12" Foreground="#FFC107"/>
+                    
+                    <Button Content="Confirm Return &amp; Close" Command="{Binding CompleteOrderCommand}" 
+                            HorizontalAlignment="Stretch" Background="#388E3C" Foreground="White" FontWeight="Bold"/>
+                </StackPanel>
+            </Border>
+            
+            <TextBlock IsVisible="{Binding !SelectedPendingOrder}" 
+                       Text="Select an incoming request to start assignment." 
+                       Foreground="Gray" FontStyle="Italic" HorizontalAlignment="Center" Margin="0,50"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

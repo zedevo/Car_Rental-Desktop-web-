@@ -1,0 +1,88 @@
+@model IEnumerable<CarRental.Data.Models.Car>
+@using CarRental.Data.Enums
+
+@{
+    ViewData["Title"] = "Our Fleet";
+}
+
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold animate-fade-in">Our <span class="text-gradient">Premium</span> Fleet</h1>
+        <p class="lead text-secondary animate-fade-in delay-1">Choose from our wide range of luxury, business, and utility vehicles.</p>
+    </div>
+
+    <div class="row g-4 animate-fade-in delay-2">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-6 col-lg-4">
+                <div class="glass-card overflow-hidden h-100 d-flex flex-column">
+                    <!-- Dynamic image with fallback -->
+                    <img src="@(string.IsNullOrEmpty(item.ImageUrl) ? "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=800" : item.ImageUrl)" 
+                         class="img-fluid" alt="@item.Make @item.Model" 
+                         style="height: 250px; width: 100%; object-fit: cover;"
+                         onerror="this.onerror=null; this.src='https://placehold.co/800x600/1a1a1a/D4AF37?text=Aurum+Veloce';">
+                    
+                    <div class="p-4 d-flex flex-column flex-grow-1">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="fw-bold mb-0 text-white">@item.Make @item.Model</h4>
+                            <span class="badge bg-primary rounded-pill">@item.DailyRate.ToString("C")/day</span>
+                        </div>
+                        <div class="mb-3">
+                             <span class="badge bg-secondary text-dark">@item.Type</span>
+                             <span class="badge @(item.Status == CarStatus.Available ? "bg-success" : "bg-danger")">@item.Status</span>
+                        </div>
+                        <div class="mt-auto d-grid gap-2">
+                             <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-light">View Details</a>
+                             <a asp-controller="Booking" asp-action="Index" class="btn btn-premium">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        
+        <!-- MOCK DATA FOR DEMONSTRATION IF DB IS EMPTY -->
+        @if (!Model.Any())
+        {
+             <div class="col-md-6 col-lg-4">
+                <div class="glass-card overflow-hidden h-100 d-flex flex-column">
+                    <img src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&q=80&w=800" class="img-fluid" alt="Porsche 911" style="height: 250px; width: 100%; object-fit: cover;">
+                    <div class="p-4 d-flex flex-column flex-grow-1">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="fw-bold mb-0 text-white">Porsche 911 (Demo)</h4>
+                             <span class="badge bg-primary rounded-pill">$299/day</span>
+                        </div>
+                        <div class="mb-3">
+                            <span class="badge bg-secondary text-dark">Sports</span>
+                            <span class="badge bg-success">Available</span>
+                        </div>
+                        <p class="text-secondary">Experience the thrill of speed with our VIP selection.</p>
+                        <div class="mt-auto d-grid gap-2">
+                             <a href="#" class="btn btn-outline-light">View Details</a>
+                             <a asp-controller="Booking" asp-action="Index" class="btn btn-premium">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="glass-card overflow-hidden h-100 d-flex flex-column">
+                    <img src="https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&q=80&w=800" class="img-fluid" alt="Bus" style="height: 250px; width: 100%; object-fit: cover;">
+                    <div class="p-4 d-flex flex-column flex-grow-1">
+                         <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="fw-bold mb-0 text-white">Volvo Bus (Demo)</h4>
+                             <span class="badge bg-success rounded-pill">$500/day</span>
+                        </div>
+                        <div class="mb-3">
+                            <span class="badge bg-secondary text-dark">Bus</span>
+                            <span class="badge bg-success">Available</span>
+                        </div>
+                        <p class="text-secondary">Comfort for the whole group with premium amenities.</p>
+                        <div class="mt-auto d-grid gap-2">
+                             <a href="#" class="btn btn-outline-light">View Details</a>
+                             <a asp-controller="Booking" asp-action="Index" class="btn btn-premium">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

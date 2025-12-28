@@ -1,0 +1,115 @@
+﻿@{
+    ViewData["Title"] = "Premium Car Rental";
+}
+
+<div class="hero-gradient">
+    <div class="container text-center">
+        <h1 class="hero-title animate-fade-in">
+            Drive the <span class="text-gradient">Future</span><br>
+            Experience <span class="text-white">Aurum Veloce</span>
+        </h1>
+        <p class="lead text-secondary fs-4 mb-5 animate-fade-in delay-1 mx-auto" style="max-width: 700px;">
+            Premium vehicle rentals for every need. Whether it's a luxury sedan, a group tourist bus, or a reliable daily driver, we have the perfect machine for you.
+        </p>
+        <div class="d-flex justify-content-center gap-3 animate-fade-in delay-2">
+            <a asp-controller="Booking" asp-action="Index" class="btn btn-premium px-5 py-3">Book Now</a>
+        </div>
+    </div>
+</div>
+
+<div class="container py-5">
+    <div class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="glass-card p-5 h-100">
+                <div class="bg-primary bg-opacity-10 p-3 rounded-4 d-inline-block mb-4">
+                    <i class="bi bi-lightning-charge-fill text-primary fs-2"></i>
+                </div>
+                <h3 class="fw-bold mb-3">Fast Booking</h3>
+                <p class="text-secondary">Book your vehicle in under 60 seconds with our streamlined digital process.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="glass-card p-5 h-100">
+                <div class="bg-secondary bg-opacity-10 p-3 rounded-4 d-inline-block mb-4">
+                    <i class="bi bi-shield-check text-success fs-2"></i>
+                </div>
+                <h3 class="fw-bold mb-3">Fully Insured</h3>
+                <p class="text-secondary">Travel with peace of mind. All rentals include premium comprehensive insurance coverage.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="glass-card p-5 h-100">
+                <div class="bg-info bg-opacity-10 p-3 rounded-4 d-inline-block mb-4">
+                    <i class="bi bi-headset text-info fs-2"></i>
+                </div>
+                <h3 class="fw-bold mb-3">24/7 Support</h3>
+                <p class="text-secondary">Our dedicated team is always available to assist you with any inquiries or issues.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Featured Cars Section -->
+    <div class="py-5">
+        <div class="d-flex justify-content-between align-items-end mb-5">
+            <div>
+                <h2 class="display-6 fw-bold mb-0">Our <span class="text-gradient">Diverse</span> Fleet</h2>
+                <p class="text-secondary mb-0">Luxury Cars, Tourist Buses, and Comfortable Sedans.</p>
+            </div>
+            <a href="#" class="text-primary text-decoration-none fw-bold">View All <i class="bi bi-arrow-right"></i></a>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="glass-card overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=800" class="img-fluid" alt="Luxury Car">
+                    <div class="p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="fw-bold mb-0">Porsche 911 (VIP)</h4>
+                            <span class="badge bg-primary rounded-pill">$249/day</span>
+                        </div>
+                        <div class="d-flex gap-3 text-secondary small mb-4">
+                            <span><i class="bi bi-speedometer2"></i> 3.2s</span>
+                            <span><i class="bi bi-gear"></i> Auto</span>
+                            <span><i class="bi bi-person"></i> 2</span>
+                        </div>
+                        <a asp-controller="Booking" asp-action="Index" class="btn btn-outline-primary w-100 rounded-3">Book Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="glass-card overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80&w=800" class="img-fluid" alt="Tourist Bus">
+                    <div class="p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="fw-bold mb-0">Volvo 9700 (Bus)</h4>
+                            <span class="badge bg-success rounded-pill">$500/day</span>
+                        </div>
+                        <div class="d-flex gap-3 text-secondary small mb-4">
+                            <span><i class="bi bi-people-fill"></i> 50 Pax</span>
+                            <span><i class="bi bi-gear"></i> Auto</span>
+                            <span><i class="bi bi-wifi"></i> WiFi</span>
+                        </div>
+                        <a asp-controller="Booking" asp-action="Index" class="btn btn-outline-primary w-100 rounded-3">Book Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="glass-card overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&q=80&w=800" class="img-fluid" alt="Regular Car">
+                    <div class="p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="fw-bold mb-0">Tesla Model S</h4>
+                            <span class="badge bg-info rounded-pill text-dark">$159/day</span>
+                        </div>
+                        <div class="d-flex gap-3 text-secondary small mb-4">
+                            <span><i class="bi bi-speedometer2"></i> 2.1s</span>
+                            <span><i class="bi bi-gear"></i> Auto</span>
+                            <span><i class="bi bi-person"></i> 5</span>
+                        </div>
+                        <a asp-controller="Booking" asp-action="Index" class="btn btn-outline-primary w-100 rounded-3">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
